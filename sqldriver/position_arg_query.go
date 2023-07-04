@@ -64,6 +64,41 @@ func (p *PositionArgQuery) SetArgs(args ...interface{}) {
 	for i := 0; i < n; i++ {
 		arg := args[i]
 		argPosition := p.argPositions[i]
+		if arg == nil {
+			arg = "NULL"
+		} else if _, ok := arg.(string); ok {
+			arg = fmt.Sprintf("'%v'", arg)
+		} else if _, ok = arg.([]byte); ok {
+			arg = fmt.Sprintf("'%v'", string(arg.([]byte)))
+		} else if _, ok = arg.(bool); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(int); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(int64); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(float64); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(float32); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(uint); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(uint64); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(uint32); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(uint16); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(uint8); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(int32); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(int16); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else if _, ok = arg.(int8); ok {
+			arg = fmt.Sprintf("%v", arg)
+		} else {
+			arg = fmt.Sprintf("'%v'", arg)
+		}
 		p.queryPieces[argPosition] = fmt.Sprintf("%v", arg)
 	}
 
